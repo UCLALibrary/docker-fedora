@@ -1,21 +1,14 @@
----
-version: '3.4'
+version: '2'
+
+volumes:
+  fedora:
+
 services:
-  cantaloupe:
-    image: nulib/cantaloupe
-    build: "./cantaloupe"
   fedora:
     image: nulib/fcrepo4
-    build: "./fcrepo"
-  localstack:
-    image: localstack/localstack
-    build: "./localstack"
-  rails:
-    image: nulib/rails
-    build: "./rails"
-  sqsd:
-    image: nulib/sqsd
-    build: "./sqsd"
-  zookeeper:
-    image: nulib/zookeeper
-    build: './zookeeper'
+    build: .
+    volumes:
+      - fedora:/data
+    ports:
+      - "8984:8080"
+      - "61613:61613"
